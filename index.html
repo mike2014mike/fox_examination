@@ -76,18 +76,18 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">題庫查詢系統</a>
+                    <!-- <a class="navbar-brand" href="#">題庫查詢系統</a> -->
+                    <!-- <form class="navbar-form navbar-left"> -->
+                    <!-- <div class="form-group"> -->
+                    <!-- <label for="keyword">關鍵字：</label> -->
+                    <input type="text" class="form-control navbar-brand" style="width: 80%;" name="keyword" placeholder="請輸入關鍵字..." v-model="keyword">
+                    <!-- </div> -->
 
+                    <!-- </form> -->
                 </div>
 
                 <div id="navbar" class="navbar-collapse collapse">
-                    <form class="navbar-form navbar-left">
-                        <div class="form-group">
-                            <label for="keyword">關鍵字：</label>
-                            <input type="text" class="form-control" name="keyword" placeholder="請輸入關鍵字..." v-model="keyword">
-                        </div>
 
-                    </form>
                     <form class="navbar-form navbar-right">
                         <label for="selector">題庫：</label>
                         <select class="form-control" name="selector" id="selector" v-model="selected">
