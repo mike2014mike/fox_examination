@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>題庫查詢系統</title>
+    <link href="images/fox.png" rel=icon>
+    <script src="js/test1.js"></script>
+    <script src="js/test2.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+
+    <style>
+        body {
+            min-height: 2000px;
+            padding-top: 70px;
+            background-image: url('images/fox.png');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: right bottom;
+            font-family: Arial, Helvetica, Microsoft JhengHei, sans-serif;
+        }
+
+        .panel-default>.panel-heading {
+            color: #fff;
+            background-color: #333;
+            border-color: #333;
+        }
+
+        .panel-default {
+            border-color: #333;
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+        li:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+
+        li:nth-child(odd) {
+            /* background-color: #f5f5f5; */
+            background-color: rgba(245, 245, 245, 0.7);
+        }
+
+        .profile-pic {
+            width: 130px;
+            margin: 9px 0 4px;
+            border-radius: 100px !important;
+            border: 2px solid #DDD;
+        }
+
+
+        .highlight {
+            background-color: #f24;
+            color: white;
+            padding: 0px 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                        aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">題庫查詢系統</a>
+
+                </div>
+
+                <div id="navbar" class="navbar-collapse collapse">
+                    <form class="navbar-form navbar-left">
+                        <div class="form-group">
+                            <label for="keyword">關鍵字：</label>
+                            <input type="text" class="form-control" name="keyword" placeholder="請輸入關鍵字..." v-model="keyword">
+                        </div>
+
+                    </form>
+                    <form class="navbar-form navbar-right">
+                        <label for="selector">題庫：</label>
+                        <select class="form-control" name="selector" id="selector" v-model="selected">
+                        <option selected value="test1">第一階段</option>
+                        <option value="test2">第二階段</option>
+                    </select>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="" data-toggle="modal" data-target="#exampleModal">關於</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+
+
+        <div class="container">
+            <div class="row">
+                <div class="panel panel-default" v-for="(type, key, index) in test">
+                    <div class="panel-heading" v-html="key"></div>
+
+                    <ul class="list-group">
+                        <li class="list-group-item" v-for="(item, index) in type" v-show="item.indexOf(keyword) != -1" v-html="keyword == '' ? item : item.replace(new RegExp('('+keyword+')', 'gi'), '<span class=highlight>'+keyword+'</span>')">
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="exampleModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">關於</h4>
+                </div>
+                <div class="modal-body">
+                    <center>
+                        <img class="profile-pic" src="images/lala.png" width="100">
+                        <p><a href="https://github.com/mike2014mike" target="_blank">Mike Chen</a></p>
+                        <br>
+                        <p>受到<a href="https://github.com/skyduck0205" target="_blank">skyduck</a>大大的啟發，也練習製作一份查詢系統。</p>
+                        <p>skyduck大大是使用angular撰寫的，而我是使用Vue撰寫而成。</p>
+                    </center>
+
+                    <br>
+                    <center>
+                        <p>如果覺得不錯的話，可以打賞給我喔！</p>
+                        <p>比特幣錢包：
+                            <code>3DcEYQjVSyNErbGdVgng6X6GAfYM7PaLMY</code>
+                        </p>
+                    </center>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+                    <!-- <button type="button" class="btn btn-primary">確認</button> -->
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                selected: 'test1',
+                test: test1,
+                keyword: ''
+            },
+            watch: {
+                selected() {
+                    console.log(this.selected);
+                    if (this.selected == 'test1') {
+                        this.test = test1
+                    } else {
+                        this.test = test2
+                    }
+                    // console.log(this.test);
+                },
+                keyword() {
+                    console.log('keyword:' + this.keyword);
+                }
+            }
+        })
+    </script>
+
+    <!-- JiaThis Button BEGIN -->
+    <script type="text/javascript">
+        var jiathis_config = {
+            siteNum: 3,
+            sm: "weixin,fb,googleplus",
+            summary: "",
+            showClose: true,
+            shortUrl: false,
+            hideMore: false
+        }
+    </script>
+    <script type="text/javascript" src="http://v3.jiathis.com/code_mini/jiathis_r.js?type=left&btn=l2.gif&move=0" charset="utf-8"></script>
+    <!-- JiaThis Button END -->
+
+
+</body>
+
+</html>
