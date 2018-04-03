@@ -1,5 +1,5 @@
 # 題庫查詢系統
-> 受到[skyduck](https://github.com/skyduck0205)大大的啟發，也練習製作一份查詢系統。[skyduck](https://github.com/skyduck0205)大大是使用angular撰寫的，而我是使用Vue撰寫而成[name=Mike Chen][time=Sat, Mar 31, 2018 10:23 AM][color=#fc80b2]
+> 受到[skyduck](https://github.com/skyduck0205)大大的啟發，也練習製作一份查詢系統。[skyduck](https://github.com/skyduck0205)大大是使用angular撰寫的，而我是使用Vue撰寫而成。
 
 ---
 
